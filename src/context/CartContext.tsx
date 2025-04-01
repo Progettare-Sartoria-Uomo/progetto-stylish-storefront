@@ -18,6 +18,7 @@ interface CartItem extends Product {}
 interface CartContextType {
   cartItems: CartItem[];
   addToCart: (product: Product) => void;
+  removeFromCart: (productId: number) => void;
   clearCart: () => void;
 }
 
@@ -30,12 +31,24 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setCartItems((prevItems) => [...prevItems, product]);
   };
 
+  const removeFromCart = (productId: number) => {
+    // Find the index of the first occurrence of the product
+    const index = cartItems.findIndex(item => item.id === productId);
+    if (index !== -1) {
+      // Create a new array without the removed item
+      setCartItems(prevItems => [
+        ...prevItems.slice(0, index),
+        ...prevItems.slice(index + 1)
+      ]);
+    }
+  };
+
   const clearCart = () => {
     setCartItems([]);
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, clearCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );

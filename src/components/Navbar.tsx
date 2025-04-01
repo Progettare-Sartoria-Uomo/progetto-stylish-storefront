@@ -1,10 +1,11 @@
 
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, ShoppingCart, ChevronDown } from 'lucide-react';
+import { Menu, ShoppingCart, ChevronDown, Trash2 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useCart } from '@/context/CartContext';
+import { useToast } from '@/hooks/use-toast';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -17,10 +18,19 @@ import {
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const { cartItems } = useCart();
+  const { cartItems, removeFromCart } = useCart();
+  const { toast } = useToast();
   
   const isActive = (path: string) => {
     return location.pathname === path;
+  };
+
+  const handleRemoveItem = (id: number, name: string) => {
+    removeFromCart(id);
+    toast({
+      title: "Producto eliminado",
+      description: `${name} ha sido eliminado del carrito`,
+    });
   };
 
   return (
@@ -126,6 +136,14 @@ const Navbar = () => {
                         {cartItems.map((item, index) => (
                           <li key={index} className="flex justify-between items-center pb-2 border-b">
                             <span>{item.name} - #{item.articleNumber}</span>
+                            <Button 
+                              variant="ghost" 
+                              size="icon"
+                              onClick={() => handleRemoveItem(item.id, item.name)}
+                              className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
                           </li>
                         ))}
                       </ul>
@@ -179,6 +197,14 @@ const Navbar = () => {
                         {cartItems.map((item, index) => (
                           <li key={index} className="flex justify-between items-center pb-2 border-b">
                             <span>{item.name} - #{item.articleNumber}</span>
+                            <Button 
+                              variant="ghost" 
+                              size="icon"
+                              onClick={() => handleRemoveItem(item.id, item.name)}
+                              className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
                           </li>
                         ))}
                       </ul>
