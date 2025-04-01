@@ -13,12 +13,15 @@ const HeroBanner = () => {
         <div className="max-w-xl text-white">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-semibold mb-4">PROGETTARE</h1>
           <p className="text-lg md:text-xl mb-6 text-tailor-cream">Excelencia en sastrería italiana</p>
-          <div className="flex space-x-4">
+          <div className="flex flex-wrap gap-3">
             <Button asChild className="bg-tailor-beige text-tailor-navy hover:bg-tailor-cream">
               <Link to="/invierno">Colección Invierno</Link>
             </Button>
             <Button asChild variant="outline" className="border-tailor-beige text-tailor-beige hover:bg-tailor-beige/10">
               <Link to="/verano">Colección Verano</Link>
+            </Button>
+            <Button asChild className="bg-tailor-cream text-tailor-navy hover:bg-tailor-beige">
+              <Link to="/ambos">Explorar Ambos</Link>
             </Button>
           </div>
         </div>

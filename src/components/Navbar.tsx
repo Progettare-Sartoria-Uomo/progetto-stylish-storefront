@@ -70,6 +70,15 @@ const Navbar = () => {
             </Link>
 
             <Link
+              to="/ambos"
+              className={`text-sm font-medium transition-colors hover:text-tailor-navy ${
+                isActive('/ambos') ? 'text-tailor-navy border-b-2 border-tailor-navy' : 'text-tailor-charcoal'
+              }`}
+            >
+              Ambos
+            </Link>
+
+            <Link
               to="/camisas"
               className={`text-sm font-medium transition-colors hover:text-tailor-navy ${
                 isActive('/camisas') ? 'text-tailor-navy border-b-2 border-tailor-navy' : 'text-tailor-charcoal'
@@ -267,6 +276,15 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Verano
+              </Link>
+              <Link
+                to="/ambos"
+                className={`px-2 py-1 text-sm font-medium transition-colors ${
+                  isActive('/ambos') ? 'text-tailor-navy bg-gray-100' : 'text-tailor-charcoal'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Ambos
               </Link>
               <Link
                 to="/camisas"
