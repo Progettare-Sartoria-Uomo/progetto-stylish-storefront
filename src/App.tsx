@@ -5,6 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import WinterPage from "./pages/WinterPage";
 import SummerPage from "./pages/SummerPage";
@@ -40,6 +41,7 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
+            <Footer />
           </div>
         </BrowserRouter>
       </CartProvider>
