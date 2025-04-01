@@ -9,6 +9,10 @@ import HomePage from "./pages/HomePage";
 import WinterPage from "./pages/WinterPage";
 import SummerPage from "./pages/SummerPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import ShirtsPage from "./pages/ShirtsPage";
+import PantsPage from "./pages/PantsPage";
+import DressPantsPage from "./pages/DressPantsPage";
+import JeansPage from "./pages/JeansPage";
 import NotFound from "./pages/NotFound";
 import { CartProvider } from "./context/CartContext";
 
@@ -28,6 +32,10 @@ const App = () => (
                 <Route path="/" element={<HomePage />} />
                 <Route path="/invierno" element={<WinterPage />} />
                 <Route path="/verano" element={<SummerPage />} />
+                <Route path="/camisas" element={<ShirtsPage />} />
+                <Route path="/pantalones" element={<PantsPage />} />
+                <Route path="/pantalones/vestir" element={<DressPantsPage />} />
+                <Route path="/pantalones/jeans" element={<JeansPage />} />
                 <Route path="/producto/:id" element={<ProductDetailPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

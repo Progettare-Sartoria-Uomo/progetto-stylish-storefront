@@ -1,22 +1,24 @@
 
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, ShoppingCart } from 'lucide-react';
+import { Menu, ShoppingCart, ChevronDown } from 'lucide-react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useCart } from '@/context/CartContext';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { cartItems } = useCart();
   
-  const navLinks = [
-    { name: 'Inicio', path: '/' },
-    { name: 'Invierno', path: '/invierno' },
-    { name: 'Verano', path: '/verano' },
-  ];
-
   const isActive = (path: string) => {
     return location.pathname === path;
   };
@@ -29,18 +31,76 @@ const Navbar = () => {
             <h1 className="text-tailor-navy text-2xl md:text-3xl font-serif font-semibold tracking-wide">PROGETTARE</h1>
           </Link>
           
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-tailor-navy ${
-                  isActive(link.path) ? 'text-tailor-navy border-b-2 border-tailor-navy' : 'text-tailor-charcoal'
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center space-x-6">
+            <Link
+              to="/"
+              className={`text-sm font-medium transition-colors hover:text-tailor-navy ${
+                isActive('/') ? 'text-tailor-navy border-b-2 border-tailor-navy' : 'text-tailor-charcoal'
+              }`}
+            >
+              Inicio
+            </Link>
+            
+            <Link
+              to="/invierno"
+              className={`text-sm font-medium transition-colors hover:text-tailor-navy ${
+                isActive('/invierno') ? 'text-tailor-navy border-b-2 border-tailor-navy' : 'text-tailor-charcoal'
+              }`}
+            >
+              Invierno
+            </Link>
+            
+            <Link
+              to="/verano"
+              className={`text-sm font-medium transition-colors hover:text-tailor-navy ${
+                isActive('/verano') ? 'text-tailor-navy border-b-2 border-tailor-navy' : 'text-tailor-charcoal'
+              }`}
+            >
+              Verano
+            </Link>
+
+            <Link
+              to="/camisas"
+              className={`text-sm font-medium transition-colors hover:text-tailor-navy ${
+                isActive('/camisas') ? 'text-tailor-navy border-b-2 border-tailor-navy' : 'text-tailor-charcoal'
+              }`}
+            >
+              Camisas
+            </Link>
+            
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className={`text-sm font-medium transition-colors hover:text-tailor-navy p-0 h-auto bg-transparent ${
+                    location.pathname.includes('/pantalones') ? 'text-tailor-navy border-b-2 border-tailor-navy' : 'text-tailor-charcoal'
+                  }`}>
+                    Pantalones <ChevronDown className="h-4 w-4" />
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="bg-white">
+                    <div className="grid gap-3 p-4 w-[200px]">
+                      <Link
+                        to="/pantalones/vestir"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <div className="text-sm font-medium leading-none">Pantalones de vestir</div>
+                      </Link>
+                      <Link
+                        to="/pantalones/jeans"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <div className="text-sm font-medium leading-none">Jeans</div>
+                      </Link>
+                      <Link
+                        to="/pantalones"
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                      >
+                        <div className="text-sm font-medium leading-none">Ver todos</div>
+                      </Link>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
             
             <Sheet>
               <SheetTrigger asChild>
@@ -155,18 +215,73 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-2">
             <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
+              <Link
+                to="/"
+                className={`px-2 py-1 text-sm font-medium transition-colors ${
+                  isActive('/') ? 'text-tailor-navy bg-gray-100' : 'text-tailor-charcoal'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Inicio
+              </Link>
+              <Link
+                to="/invierno"
+                className={`px-2 py-1 text-sm font-medium transition-colors ${
+                  isActive('/invierno') ? 'text-tailor-navy bg-gray-100' : 'text-tailor-charcoal'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Invierno
+              </Link>
+              <Link
+                to="/verano"
+                className={`px-2 py-1 text-sm font-medium transition-colors ${
+                  isActive('/verano') ? 'text-tailor-navy bg-gray-100' : 'text-tailor-charcoal'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Verano
+              </Link>
+              <Link
+                to="/camisas"
+                className={`px-2 py-1 text-sm font-medium transition-colors ${
+                  isActive('/camisas') ? 'text-tailor-navy bg-gray-100' : 'text-tailor-charcoal'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Camisas
+              </Link>
+              <div className="border-t border-gray-200 pt-2">
+                <p className="px-2 py-1 text-sm font-medium text-tailor-charcoal">Pantalones:</p>
                 <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`px-2 py-1 text-sm font-medium transition-colors ${
-                    isActive(link.path) ? 'text-tailor-navy bg-gray-100' : 'text-tailor-charcoal'
+                  to="/pantalones/vestir"
+                  className={`px-4 py-1 text-sm font-medium transition-colors ${
+                    isActive('/pantalones/vestir') ? 'text-tailor-navy bg-gray-100' : 'text-tailor-charcoal'
                   }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {link.name}
+                  Pantalones de vestir
                 </Link>
-              ))}
+                <Link
+                  to="/pantalones/jeans"
+                  className={`px-4 py-1 text-sm font-medium transition-colors block mt-2 ${
+                    isActive('/pantalones/jeans') ? 'text-tailor-navy bg-gray-100' : 'text-tailor-charcoal'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Jeans
+                </Link>
+                <Link
+                  to="/pantalones"
+                  className={`px-4 py-1 text-sm font-medium transition-colors block mt-2 ${
+                    isActive('/pantalones') && !isActive('/pantalones/vestir') && !isActive('/pantalones/jeans') 
+                      ? 'text-tailor-navy bg-gray-100' : 'text-tailor-charcoal'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Ver todos
+                </Link>
+              </div>
             </div>
           </div>
         )}

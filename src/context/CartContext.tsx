@@ -8,6 +8,9 @@ export interface Product {
   season: 'invierno' | 'verano';
   articleNumber: string;
   images: string[];
+  type: string | null;
+  category: 'camisa' | 'pantalon' | null;
+  pantalonType: 'vestir' | 'jeans' | null;
 }
 
 interface CartItem extends Product {}
