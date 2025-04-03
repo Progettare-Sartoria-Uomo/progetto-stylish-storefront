@@ -1,3 +1,4 @@
+
 import { Product } from '@/context/CartContext';
 
 // Helper function to create product data
@@ -10,7 +11,8 @@ const createProduct = (
   detailImages: string[],
   type?: string,
   category?: 'camisa' | 'pantalon' | 'ambo' | null,
-  pantalonType?: 'vestir' | 'jeans' | null
+  pantalonType?: 'vestir' | 'jeans' | null,
+  camisaType?: 'lisa' | 'fantasia' | 'estampada' | 'manga-corta' | null
 ): Product => ({
   id,
   name,
@@ -20,7 +22,8 @@ const createProduct = (
   images: detailImages,
   type: type || null,
   category: category || null,
-  pantalonType: pantalonType || null
+  pantalonType: pantalonType || null,
+  camisaType: camisaType || null
 });
 
 // Products data
@@ -77,7 +80,9 @@ export const products: Product[] = [
       'https://images.unsplash.com/photo-1564859228273-274232fdb516?q=80&w=1974&auto=format&fit=crop'
     ],
     null,
-    'camisa'
+    'camisa',
+    null,
+    'lisa'
   ),
   createProduct(
     5, 
@@ -121,7 +126,9 @@ export const products: Product[] = [
       'https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=1974&auto=format&fit=crop'
     ],
     null,
-    'camisa'
+    'camisa',
+    null,
+    'fantasia'
   ),
   createProduct(
     8, 
@@ -176,7 +183,9 @@ export const products: Product[] = [
       'https://images.unsplash.com/photo-1598032895572-25e29aced2c6?q=80&w=2080&auto=format&fit=crop'
     ],
     null,
-    'camisa'
+    'camisa',
+    null,
+    'manga-corta'
   ),
   createProduct(
     12, 
@@ -204,7 +213,9 @@ export const products: Product[] = [
       'https://images.unsplash.com/photo-1589310243389-96a5483213a8?q=80&w=1974&auto=format&fit=crop'
     ],
     null,
-    'camisa'
+    'camisa',
+    null,
+    'lisa'
   ),
   createProduct(
     14, 
@@ -218,7 +229,9 @@ export const products: Product[] = [
       'https://images.unsplash.com/photo-1620138546344-7b2c38516edf?q=80&w=1974&auto=format&fit=crop'
     ],
     null,
-    'camisa'
+    'camisa',
+    null,
+    'estampada'
   ),
   createProduct(
     15, 
@@ -232,7 +245,9 @@ export const products: Product[] = [
       'https://images.unsplash.com/photo-1613852348853-d04dd6cf04f4?q=80&w=1974&auto=format&fit=crop'
     ],
     null,
-    'camisa'
+    'camisa',
+    null,
+    'fantasia'
   ),
   
   // Additional Pants (Pantalones)
@@ -364,12 +379,16 @@ export const getProductsBySeason = (season: 'invierno' | 'verano' | 'primavera' 
   return products.filter(product => product.season === season);
 };
 
-export const getProductsByCategory = (category: 'camisa' | 'pantalon'): Product[] => {
+export const getProductsByCategory = (category: 'camisa' | 'pantalon' | 'ambo'): Product[] => {
   return products.filter(product => product.category === category);
 };
 
 export const getProductsByPantalonType = (type: 'vestir' | 'jeans'): Product[] => {
   return products.filter(product => product.category === 'pantalon' && product.pantalonType === type);
+};
+
+export const getProductsByCamisaType = (type: 'lisa' | 'fantasia' | 'estampada' | 'manga-corta'): Product[] => {
+  return products.filter(product => product.category === 'camisa' && product.camisaType === type);
 };
 
 export const getProductsByType = (type: string): Product[] => {
