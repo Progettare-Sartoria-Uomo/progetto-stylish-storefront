@@ -1,16 +1,15 @@
-
 import { Product } from '@/context/CartContext';
 
 // Helper function to create product data
 const createProduct = (
   id: number, 
   name: string, 
-  season: 'invierno' | 'verano', 
+  season: 'invierno' | 'verano' | 'primavera' | 'otoño' | 'todo-el-año' | 'multi-estacion' | 'coleccion-especial', 
   articleNumber: string, 
   imagePath: string,
   detailImages: string[],
   type?: string,
-  category?: 'camisa' | 'pantalon' | null,
+  category?: 'camisa' | 'pantalon' | 'ambo' | null,
   pantalonType?: 'vestir' | 'jeans' | null
 ): Product => ({
   id,
@@ -297,13 +296,71 @@ export const products: Product[] = [
     'pantalon',
     'vestir'
   ),
+  
+  // Ambos products
+  createProduct(
+    20, 
+    'Ambo Ejecutivo Negro', 
+    'todo-el-año', 
+    '5001', 
+    'https://images.unsplash.com/photo-1553240799-36bbf332a5c3?q=80&w=2070&auto=format&fit=crop',
+    [
+      'https://images.unsplash.com/photo-1553240799-36bbf332a5c3?q=80&w=2070&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1593032465175-481ac7f401f0?q=80&w=2080&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1598032895397-b9472444bf93?q=80&w=2080&auto=format&fit=crop'
+    ],
+    'ambo',
+    'ambo'
+  ),
+  createProduct(
+    21, 
+    'Ambo Clásico Gris', 
+    'invierno', 
+    '5002', 
+    'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop',
+    [
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1598032895397-b9472444bf93?q=80&w=2080&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?q=80&w=1974&auto=format&fit=crop'
+    ],
+    'ambo',
+    'ambo'
+  ),
+  createProduct(
+    22, 
+    'Ambo Azul Marino', 
+    'verano', 
+    '5003', 
+    'https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=1974&auto=format&fit=crop',
+    [
+      'https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=1974&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1598032895397-b9472444bf93?q=80&w=2080&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1594938291221-94f18cbb5660?q=80&w=2080&auto=format&fit=crop'
+    ],
+    'ambo',
+    'ambo'
+  ),
+  createProduct(
+    23, 
+    'Ambo Premium Beige', 
+    'primavera', 
+    '5004', 
+    'https://images.unsplash.com/photo-1594938298601-9dcb1d2bb1e7?q=80&w=2080&auto=format&fit=crop',
+    [
+      'https://images.unsplash.com/photo-1594938298601-9dcb1d2bb1e7?q=80&w=2080&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?q=80&w=2080&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1598032895397-b9472444bf93?q=80&w=2080&auto=format&fit=crop'
+    ],
+    'ambo',
+    'ambo'
+  ),
 ];
 
 export const getProductById = (id: number): Product | undefined => {
   return products.find(product => product.id === id);
 };
 
-export const getProductsBySeason = (season: 'invierno' | 'verano'): Product[] => {
+export const getProductsBySeason = (season: 'invierno' | 'verano' | 'primavera' | 'otoño' | 'todo-el-año' | 'multi-estacion' | 'coleccion-especial'): Product[] => {
   return products.filter(product => product.season === season);
 };
 
@@ -313,4 +370,8 @@ export const getProductsByCategory = (category: 'camisa' | 'pantalon'): Product[
 
 export const getProductsByPantalonType = (type: 'vestir' | 'jeans'): Product[] => {
   return products.filter(product => product.category === 'pantalon' && product.pantalonType === type);
+};
+
+export const getProductsByType = (type: string): Product[] => {
+  return products.filter(product => product.type === type);
 };

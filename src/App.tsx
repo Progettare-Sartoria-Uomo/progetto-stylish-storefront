@@ -14,6 +14,7 @@ import ShirtsPage from "./pages/ShirtsPage";
 import PantsPage from "./pages/PantsPage";
 import DressPantsPage from "./pages/DressPantsPage";
 import JeansPage from "./pages/JeansPage";
+import AmbosPage from "./pages/AmbosPage";
 import NotFound from "./pages/NotFound";
 import { CartProvider } from "./context/CartContext";
 
@@ -37,6 +38,7 @@ const App = () => (
                 <Route path="/pantalones" element={<PantsPage />} />
                 <Route path="/pantalones/vestir" element={<DressPantsPage />} />
                 <Route path="/pantalones/jeans" element={<JeansPage />} />
+                <Route path="/ambos" element={<AmbosPage />} />
                 <Route path="/producto/:id" element={<ProductDetailPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
