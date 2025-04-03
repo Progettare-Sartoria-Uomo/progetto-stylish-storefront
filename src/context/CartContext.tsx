@@ -21,7 +21,8 @@ export type CartItem = {
 
 type CartContextType = {
   cart: CartItem[];
-  addToCart: (product: Product, quantity: number) => void;
+  cartItems: Product[]; // Added this property
+  addToCart: (product: Product, quantity?: number) => void; // Made quantity optional
   removeFromCart: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
   clearCart: () => void;
@@ -34,7 +35,10 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const addToCart = (product: Product, quantity: number) => {
+  // Derive cartItems from cart for components that only need product info
+  const cartItems = cart.map(item => item.product);
+
+  const addToCart = (product: Product, quantity: number = 1) => { // Default quantity to 1
     setCart(prevCart => {
       const existingItem = prevCart.find(item => item.product.id === product.id);
       
@@ -80,6 +84,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   return (
     <CartContext.Provider value={{ 
       cart, 
+      cartItems,
       addToCart, 
       removeFromCart, 
       updateQuantity, 

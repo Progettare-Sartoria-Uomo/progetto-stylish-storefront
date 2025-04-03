@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, ShoppingCart, ChevronDown, Trash2 } from 'lucide-react';
@@ -17,7 +18,7 @@ import {
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const { cartItems, removeFromCart } = useCart();
+  const { cart, cartItems, removeFromCart } = useCart(); // Properly destructure from useCart
   const { toast } = useToast();
   
   const isActive = (path: string) => {
@@ -124,9 +125,9 @@ const Navbar = () => {
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="relative">
                   <ShoppingCart className="h-5 w-5" />
-                  {cartItems.length > 0 && (
+                  {cart.length > 0 && (
                     <span className="absolute -top-1 -right-1 bg-tailor-navy text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                      {cartItems.length}
+                      {cart.length}
                     </span>
                   )}
                 </Button>
@@ -185,9 +186,9 @@ const Navbar = () => {
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="relative mr-2">
                   <ShoppingCart className="h-5 w-5" />
-                  {cartItems.length > 0 && (
+                  {cart.length > 0 && (
                     <span className="absolute -top-1 -right-1 bg-tailor-navy text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                      {cartItems.length}
+                      {cart.length}
                     </span>
                   )}
                 </Button>

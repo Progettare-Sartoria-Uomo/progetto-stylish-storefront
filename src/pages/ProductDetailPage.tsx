@@ -70,7 +70,7 @@ const ProductDetailPage = () => {
           <Button 
             className="w-full md:w-auto bg-tailor-navy hover:bg-tailor-charcoal text-white"
             onClick={() => {
-              addToCart(product);
+              addToCart(product); // Now works with the default quantity
               window.scrollTo(0, 0);
             }}
           >
